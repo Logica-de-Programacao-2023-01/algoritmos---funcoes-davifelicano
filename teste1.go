@@ -1,23 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+//Crie uma função que receba uma string como parâmetro e retorne um
+//novo slice com todas as palavras contidas na string. Considere que
+//as palavras são separadas por espaços em branco. Caso a string seja
+//vazia, retorne um erro.
+
+func separarPalavras(s string) ([]string, error) {
+	if len(s) == 0 {
+		return nil, errors.New("A string está vazia")
+	}
+	palavras := strings.Split(s, " ")
+	return palavras, nil
+}
 
 func main() {
-	var a, b int
-	fmt.Print("Digite um nome")
-	fmt.Scan(&a)
-	fmt.Print("Digite um nome")
-	fmt.Scan(&b)
-	resultado, err := divisao(a, b)
+	s := "Olá, tube bem?"
+	palavra, err := separarPalavras(s)
 	if err != nil {
-		fmt.Println("Erro:", err)
-		return
+		fmt.Println(err)
+	} else {
+		fmt.Println(palavra)
 	}
-	fmt.Print(resultado)
-}
-func divisao(a, b int) (int, error) {
-	if b == 0 {
-		return 0, fmt.Errorf("Não pode")
-	}
-	return a / b, nil
 }
