@@ -3,28 +3,30 @@ package main
 import (
 	"errors"
 	"fmt"
-	"strings"
 )
 
-//Crie uma função que receba uma string como parâmetro e retorne um
-//novo slice com todas as palavras contidas na string. Considere que
-//as palavras são separadas por espaços em branco. Caso a string seja
-//vazia, retorne um erro.
-
-func separarPalavras(s string) ([]string, error) {
-	if len(s) == 0 {
-		return nil, errors.New("A string está vazia")
-	}
-	palavras := strings.Split(s, " ")
-	return palavras, nil
-}
-
 func main() {
-	s := "Olá, tube bem?"
-	palavra, err := separarPalavras(s)
+	numero := 12345
+	soma, err := somaDigitos(numero)
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(palavra)
+		fmt.Println(soma)
 	}
+}
+
+func somaDigitos(numero int) (int, error) {
+	if numero < 0 {
+		return 0, errors.New("O número é negativo")
+	}
+
+	soma := 0
+
+	for numero > 0 {
+		digito := numero % 10
+		soma += digito
+		numero /= 10
+	}
+
+	return soma, nil
 }
